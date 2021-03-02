@@ -410,8 +410,8 @@ def _model_loop(args, loop_type, loader, model, opt, epoch, adv, writer):
     prec = 'NatPrec' if not adv else 'AdvPrec'
     loop_msg = 'Train' if loop_type == 'train' else 'Val'
 
-    # switch to train/eval mode depending
-    model = model.train() if is_train else model.eval()
+    # disable BNEval mode to keep consistency with models trained by Fast AT
+    model = model.train() # if is_train else model.eval()
 
     # If adv training (or evaling), set eps and random_restarts appropriately
     if adv:
